@@ -41,9 +41,10 @@
 ## 🌱 디렉토리 및 파일 구조
 
 ### 프로그래머스(programmers)
-`플랫폼/레벨/문제명/자기이름.java` 형식
-
-- 예시 : /programmers/src/level1/신고결과받기/James.java
+> 플랫폼/본인이름/레벨/문제이름.java 형식
+`문제 이름(클래스)은 자유입니다`
+- 예시 : /programmers/강시혁/level1/신고결과받기.java
+- 예시 : /programmers/강시혁/level1/PlusMinus.java
 
 <br>
 
@@ -57,5 +58,5 @@
 
 ----
 
-`@Created By [강시혁](https://github.com/Si-Hyeak-KANG)`
+[`@Created By 강시혁`](https://github.com/Si-Hyeak-KANG)
 
