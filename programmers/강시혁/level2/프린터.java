@@ -22,7 +22,7 @@ public class 프린터 {
         Queue<Integer> printerQueue = arrToQueue(priorities);
         Queue<Integer> indexQueue = indexToQueue(priorities);
 
-        while (printerQueue.size() > 0) {
+        while (!printerQueue.isEmpty()) {
             int maxPriority = getMaxPriority(printerQueue);
             if (isMaxPriority(printerQueue.peek(), maxPriority)) {
                 if (indexQueue.peek() == location) {
