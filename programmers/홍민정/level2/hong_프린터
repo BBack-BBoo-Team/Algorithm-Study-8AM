@@ -1,0 +1,63 @@
+import java.util.PriorityQueue;
+import java.util.Collections;
+
+class Solution {
+public int solution(int[] priorities, int location) {
+int answer = 0;
+
+//우선순위 큐 선언 및 내림차순 정렬
+PriorityQueue<Integer> que = new PriorityQueue<>(Collections.reverseOrder());
+
+//우선순위 큐에 큐를 하나씩 담아줌    
+for(int i=0; i<priorities.length; i++) {
+        que.offer(priorities[i]);
+    }
+    //큐의 목록을 하나씩 제거하며 값과 위치가 일치하는 경우 answer 반환
+    while(!que.isEmpty()) {
+        for(int j=0; j<priorities.length; j++) {
+            if(que.peek() == priorities[j]) {
+                que.poll();
+                answer++;
+
+                if(location == j) {
+                    return answer;
+                }
+            }
+        }
+    }
+    return answer;
+}
+
+}
+
+/* 우선순위 큐 : Priority Queue
+
+ - 일반적인 큐의 구조인 : FIFO 를 가짐
+
+ - 우선순위를 먼저 결정하고 우선순위가 높은 데이터가 먼저 나가는 구조
+
+1) offer 메소드
+
+ - 우선순위 큐에 원소를 삽입하는 메서드
+
+2) poll 메서드
+
+ - 우선순위 큐의 머리부분의 원소를 제거한 후 해당 원소를 반환
+
+ - 우선순위의 큐가 비어있는 경우 null 반환
+
+3) peek 메서드
+
+ - 우선순위 큐의 머리부분의 원소를 제거하지 않고 해당 원소를 반환
+
+ - 우선순위 큐가 비어있는 경우 null 반환
+
+*
+
+/* Collections.reverseOrder를 해줄경우와 해주지 않았을 때
+
+Collections.reverseOrder 했을 때는 높은 숫자가 우선 순위 int형 큐 선언 (내림차순 정렬)
+
+Collections.reverseOrder 안했을 때는 낮은 숫자가 우선순위인 int형 큐 선언 (오름차순 정렬)
+
+*/
