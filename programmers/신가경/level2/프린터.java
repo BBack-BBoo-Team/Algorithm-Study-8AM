@@ -1,3 +1,5 @@
+package programmers.신가경.level2;
+
 import java.util.ArrayList;
 
 public class 프린터 {
