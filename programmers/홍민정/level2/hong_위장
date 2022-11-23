@@ -5,6 +5,7 @@ import java.util.*;
  즉, head - {'yello_hat', 'green_hat', 'x'}
      eye - {'blue_eyewear', 'x'} 처럼의 모양을 위해 각 숫자에 +1씩 해줌 (조합하여 경우의 수를 만들기 위해 -> 예를 들어, eye의 경우 blue만 썼음을 나타내기 위해 (blue, 0)의 조합이 필요함
      이 경우를 위해서는 각 항목에 아무것도 입지 않는 데이터를 만들어주고 마지막에 모든 종류마다 아무것도 입지 않는 경우 (0,0)을 빼주면 됨
+     계산식으로 나타내면 (a+1)(b+1)-1 인꼴 (여기서 -1이 종류마다 아무것도 입지 않은 경우)
 */
 class Solution {
     public int solution(String[][] clothes) {
