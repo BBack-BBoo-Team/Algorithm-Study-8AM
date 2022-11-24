@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class 위장 {
     public static void main(String[] args) {
-
         위장 test = new 위장();
         String[][] clothes = new String[][]{{"yellow_hat", "headgear"}, {"blue_sunglasses", "eyewear"}, {"green_turban", "headgear"}};
         int result = test.solution(clothes);

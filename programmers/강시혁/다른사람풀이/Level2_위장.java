@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import static java.util.stream.Collectors.*;
 
+
 public class Level2_위장 {
     public int solution(String[][] clothes) {
         return Arrays.stream(clothes)
