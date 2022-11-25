@@ -6,7 +6,7 @@ import java.util.Arrays;
 import static java.lang.System.out;
 
 /**
- * Level1
+ * Level2
  * 행렬 테두리 회전하기
  */
 public class 행렬_테두리_회전하기 {
@@ -16,7 +16,7 @@ public class 행렬_테두리_회전하기 {
         int[] result = test.solution(6, 6, new int[][]{{2, 2, 5, 4}, {3, 3, 6, 6}, {5, 1, 6, 3}});
         Arrays.stream(result).forEach(out::println);
     }
-    
+
     public int[] solution(int rows, int columns, int[][] queries) {
 
         int[] answer = new int[queries.length];
