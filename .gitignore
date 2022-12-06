@@ -2,7 +2,7 @@
 *.iws
 *.iml
 *.ipr
-*.DS_Store
+.DS_Store
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
