@@ -1,36 +1,39 @@
-package programmers.강지효.level2;
+package etc;
 
 public class Joystick {
     public static void main(String[] args) {
-        String name = "BBBAAABBBB";
+        String name = "AAABBBABA";
         int answer = 0;
 
-//        char[] arr = new char[26];
-//        for(int i=0; i<arr.length;i++){
-//            arr[i] = (char) (65+i);
-//            System.out.println(i + " : " + arr[i]);
-//        }
-        //위치 카운트
+        //위치(좌우) 카운트
         int cnt = 0;
 
         int len = name.length();
         int current = 0;
-        int min = len-1;
-
-        for(int i =1;i < len ; i++){
-            if(name.charAt(i) != 'A') {
-                cnt = len - i + (current*2);
-                min = Math.min(min,cnt);
-                cnt = (len -i) * 2 + current;
-                min = Math.min(min,cnt);
-                current = i;
-
+        int min = 0;
+        //좌우 이동 최대값 설정
+        for(int j =1;j < len ; j++){
+            if(name.charAt(j) !='A'){
+                min = j;
             }
         }
-        System.out.println(min);
+
+        // 좌우 이동 비교
+        for(int i =1;i < len ; i++){
+
+            if(name.charAt(i) !='A'){
+                min = Math.min(min, (current*2) + len -i);
+                min = Math.min(min, current + (len -i)*2 );
+                current = i;
+            }
+        }
+
+        answer = min;
 
 
-        //알파멧 카운트
+
+
+        //알파벳(상하) 카운트
         for(int i = 0; i < len;i++){
             char a = 'A';
             cnt = 0;
@@ -46,7 +49,7 @@ public class Joystick {
             }
 
         }
-//        System.out.println(answer);
+        System.out.println(answer);
 
     }
 }
