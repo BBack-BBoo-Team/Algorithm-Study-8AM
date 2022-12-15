@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Solution {
+    public int solution(String name) {
+        int answer = 0;
+        /* 단순히 이동한 거리 */
+        int move = name.length() - 1; 
+        
+        for(int i = 0; i < name.length(); i++) {
+        /* 조이스틱 상하이동
+            (1) 알파벳 - 'A'
+            (2) 'Z' - (알파벳 + 1) 중 더 작은 경우로 이동 */
+            answer += Math.min(name.charAt(i) - 'A', 26 - (name.charAt(i) - 'A'));
+            
+            /* 조이스틱 좌우 이동
+             즉, A가 연속으로 나오는 경우에 대한 처리 */
+            if (i < name.length() - 1 && name.charAt(i + 1) == 'A') {
+                int indexA = i + 1;
+                while(indexA < name.length() && name.charAt(indexA) == 'A')
+                    indexA++;
+                // 왕복을 위해 해당하는 곳에 *2를 해줌
+                move = Math.min(move, i * 2 + (name.length() - indexA));// 오른쪽으로 갔다가 다시 왼쪽으로
+                move = Math.min(move, i + (name.length() - indexA) * 2);// 왼쪽으로 갔다가 다시 오른쪽으로
+            }
+        }
+        return answer + move;
+    }
+}
