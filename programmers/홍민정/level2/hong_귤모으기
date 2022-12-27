@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int k, int[] tangerine) {
+        int answer = 0;
+        Arrays.sort(tangerine);
+        int max = tangerine[tangerine.length-1];
+        
+        int[] list = new int[max];
+        
+        for(int i=0; i<tangerine.length; i++){
+            int index = tangerine[i];
+            list[index]++;
+        }
+        
+        int realMax = 0;
+        for(int i : list )  realMax = Math.max( i, realMax );
+        
+        for(int i=0; i<list.length; i++) {
+            if(list[i] == realMax) {
+                answer++;
+            }
+        }
+        
+
+        return answer;
+    }
+}
