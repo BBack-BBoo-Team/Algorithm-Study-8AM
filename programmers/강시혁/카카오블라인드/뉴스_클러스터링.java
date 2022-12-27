@@ -15,7 +15,7 @@ public class 뉴스_클러스터링 {
         System.out.println(result);
 
         str1 = "aa1+aa2";
-        str2 = "&%^*%^*12";
+        str2 = "AAAA12";
         result = test.solution(str1, str2);
         System.out.println(result);
 
@@ -25,58 +25,62 @@ public class 뉴스_클러스터링 {
         System.out.println(result);
     }
 
+    /**
+     * 반례 point : 공집합을 어떻게 처리하는가
+     */
     public int solution(String str1, String str2) {
+
+        // 1. 문자 모두 대문자로 변환
         str1 = str1.toUpperCase();
         str2 = str2.toUpperCase();
 
+        // 2. 각 문자열을 두 글자씩 분리 후 중복 체크
         HashMap<String, Integer> str1Map = new HashMap<>();
-        HashMap<String,Integer> str2Map = new HashMap<>();
+        HashMap<String, Integer> str2Map = new HashMap<>();
+        subStringAndSetCount(str1, str1Map);
+        subStringAndSetCount(str2, str2Map);
 
-        for (int i = 0; i < str1.length() - 1; i++) {
-            char current = str1.charAt(i);
-            char next = str1.charAt(i+1);
-            if (current < 65 || current > 90 || next < 65 || next > 90) continue;
+        // 3. 교집합, 합집합 수 체크
+        double interSet = 0, sumSet = 0, result = 0;
 
+        for (String str : str1Map.keySet()) {
 
-            String newStr = str1.substring(i,i+2);
-            str1Map.put(newStr, str1Map.getOrDefault(newStr, 0)+1);
-        }
-
-        for (int i = 0; i < str2.length() - 1; i++) {
-            char current = str2.charAt(i);
-            char next = str2.charAt(i+1);
-            if (current < 65 || current > 90 || next < 65 || next > 90) continue;
-
-            String newStr = str2.substring(i,i+2);
-            str2Map.put(newStr, str2Map.getOrDefault(newStr, 0)+1);
-        }
-
-        double interSet =0 , sumSet = 0;
-
-        for (String v : str1Map.keySet()) {
-            if(str2Map.containsKey(v)) {
-                interSet += min(str1Map.get(v), str2Map.get(v));
-                sumSet += max(str1Map.get(v), str2Map.get(v));
-                str2Map.remove(v);
+            if(str2Map.containsKey(str)) {
+                interSet += min(str1Map.get(str), str2Map.get(str));
+                sumSet += max(str1Map.get(str), str2Map.get(str));
+                str2Map.remove(str);
             } else {
-                sumSet += str1Map.get(v);
+                sumSet += str1Map.get(str);
             }
         }
 
-        if(!str2Map.isEmpty()) {
-            for (String v : str2Map.keySet()) {
-                sumSet += str2Map.get(v);
-            }
+        for (String str : str2Map.keySet()) sumSet += str2Map.get(str);
+
+        // 공집합일 경우(합집합도 없는 경우)는 유사도 1 * 65536 반환
+        if(sumSet == 0) {
+            return 65536;
         }
+        
+        result = interSet / sumSet;
+        return (int) (65536 * result);
+    }
 
-        double oper = interSet / sumSet;
+    private void subStringAndSetCount(String str, HashMap<String, Integer> map) {
+        for (int i = 0; i < str.length()-1; i++) {
+            char currChar = str.charAt(i);
+            char nextChar = str.charAt(i+1);
+            if (!isAlphabet(currChar) || !isAlphabet(nextChar)) continue;
 
-        if(interSet == 0 || sumSet == 0) {
-            oper = 1;
+            String subStr = str.substring(i, i + 2);
+            setCount(map, subStr);
         }
+    }
 
-        int answer = (int) (65536 * oper);
+    private static void setCount(HashMap<String, Integer> map, String str) {
+        map.put(str, map.getOrDefault(str, 0)+1);
+    }
 
-        return answer;
+    boolean isAlphabet(char ch) {
+        return ch >= 65 && ch <= 90;
     }
 }
