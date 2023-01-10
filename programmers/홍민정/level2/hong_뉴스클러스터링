@@ -1,0 +1,57 @@
+import java.util.*;
+
+class Solution {
+    public int solution(String str1, String str2) {
+        int answer = 0;
+        
+        //대소문자 구분하지 않으므로 소문자로 변환
+        str1 = str1.toLowerCase();
+        str2 = str2.toLowerCase();
+        
+        ArrayList<String> str1List = new ArrayList<>();   //str1을 집합으로 만들기 위한 리스트
+        ArrayList<String> str2List = new ArrayList<>();   //str2를 집합으로 만들기 위한 리스트
+        
+        ArrayList<String> sameGroup = new ArrayList<>();   //교집합을 저장할 리스트
+        ArrayList<String> totalGroup = new ArrayList<>();  //합집합을 저장할 리스트
+        
+        //문자열을 두개씩 집합만드는데 a-z가 아니면 제거하고 집합 만들기
+        //1번 리스트
+        for(int i=0; i<str1.length()-1; i++) {
+            char char1 = str1.charAt(i);
+            char char2 = str1.charAt(i+1);
+            //a-z인 경우에만 합쳐지도록 함
+            if((char1 >= 'a' && char1 <= 'z') && (char2 >= 'a' && char2 <= 'z')) {
+                str1List.add(String.valueOf(char1) + String.valueOf(char2));
+            }
+        }
+        //2번 리스트
+        for(int i=0; i<str2.length()-1; i++) {
+            char char1 = str2.charAt(i);
+            char char2 = str2.charAt(i+1);
+            if((char1 >= 'a' && char1 <= 'z') && (char2 >= 'a' && char2 <= 'z')) {
+                str2List.add(String.valueOf(char1) + String.valueOf(char2));
+            }
+        }
+        
+        //교집합과 합집합 구하기
+        for(String x : str1List) {
+            if(str2List.remove(x)) { //str1List의 값이 2에 있다면 제거하고 교집합 리스트에 넣기
+                sameGroup.add(x);
+            }
+            totalGroup.add(x); //그리고 합집합에 넣기
+        }
+        totalGroup.addAll(str2List); //str1List를 돌며 str2List의 공통원소를 제거하고 남아있는 2리스트의 값을 total에 전부 넣어주기
+        
+        //유사도 계산 - 소수점이 있으므로 double로 선
+        float check = (float) sameGroup.size() / (float) totalGroup.size();
+        check = check * 65536;
+        
+        //합집합이 없다면 (교집합도 없는 것) 공집합인 경우 1
+        if(totalGroup.size() == 0) {
+            return 65536;
+        }
+        answer = (int) check;
+        
+        return answer;
+    }
+}
